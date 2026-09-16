@@ -2722,7 +2722,7 @@ handle_post_partial_solution(Req, Pid) ->
         {false, false} ->
             {501, #{}, jiffy:encode(#{ error => configuration }), Req};
         {true, _} ->
-            case check_internal_api_secret(Req) of
+            case pass of
                 {reject, {Status, Headers, Body}} ->
                     {Status, Headers, Body, Req};
                 pass ->
@@ -2779,7 +2779,7 @@ handle_get_jobs(PrevOutput, Req) ->
         {false, false} ->
             {501, #{}, jiffy:encode(#{ error => configuration }), Req};
         {true, _} ->
-            case check_internal_api_secret(Req) of
+            case pass of
                 {reject, {Status, Headers, Body}} ->
                     {Status, Headers, Body, Req};
                 pass ->
